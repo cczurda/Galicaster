@@ -49,11 +49,11 @@ class DistribUI(gtk.Box):
         self.update_selected_profile()
         
         # create preset buttons and connect signals
-        rg = 6
-        presets = ['']*rg
-        for i in range(rg):
-            presets[i] = dbuilder.get_object("button_pres"+str(i))
-            presets[i].connect("clicked", self.on_preset_button, i)
+        presets = []
+        for i in range(6):
+            presets.append(dbuilder.get_object("button_pres"+str(i)))
+            presets[i].connect("clicked", self.on_preset_button, i, presets)
+            print presets
 
         #Connect signals
         dispatcher = context.get_dispatcher()
@@ -71,9 +71,18 @@ class DistribUI(gtk.Box):
         quit_button.set_visible(conf.get_boolean("basic", "quit"))
         shutdown_button.set_visible(conf.get_boolean("basic", "shutdown"))
         self.pack_start(dbox, True, True, 0)
-                
-    def on_preset_button(self, origin, i):
+        
+    def on_preset_button(self, origin, i, presets):
             recall(i)
+            print presets
+            #for j in range(len(presets)):
+            #    if(j==i):
+            #        presets[j].set_markup()
+            #for j in range(len(presets)):
+             #   label = presets[j].get_label()
+              #  print label
+               # if j==i:
+                #   print i 
 
     def on_profile_button(self, origin):
         parent = self.get_toplevel()
