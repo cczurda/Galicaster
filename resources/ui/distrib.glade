@@ -223,10 +223,13 @@
                   <object class="GtkHBox" id="hbox_cam">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="spacing">1</property>
+                    <property name="homogeneous">True</property>
                     <child>
                       <object class="GtkVBox" id="vbox_pres1">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="spacing">1</property>
                         <child>
                           <object class="GtkButton" id="button_pres0">
                             <property name="label" translatable="yes">0</property>
@@ -265,6 +268,7 @@
                       <object class="GtkVBox" id="vbox_pres2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="spacing">1</property>
                         <child>
                           <object class="GtkButton" id="button_pres1">
                             <property name="label" translatable="yes">1</property>
@@ -302,6 +306,7 @@
                       <object class="GtkVBox" id="vbox_pres3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
+                        <property name="spacing">1</property>
                         <child>
                           <object class="GtkButton" id="button_pres2">
                             <property name="label" translatable="yes">2</property>
