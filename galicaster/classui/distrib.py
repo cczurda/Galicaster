@@ -22,6 +22,7 @@ from galicaster import __version__
 from galicaster.classui.profile import ProfileUI as ListProfile
 from galicaster.classui.about import GCAboutDialog
 from galicaster.utils.resize import relabel
+from galicaster.utils.visca import recall
 
 class DistribUI(gtk.Box):
     """
@@ -47,6 +48,13 @@ class DistribUI(gtk.Box):
         self.selected = dbuilder.get_object("selected_profile")
         self.update_selected_profile()
         
+        # create preset buttons and connect signals
+        rg = 6
+        presets = ['']*rg
+        for i in range(rg):
+            presets[i] = dbuilder.get_object("button_pres"+str(i))
+            presets[i].connect("clicked", self.on_preset_button, i)
+
         #Connect signals
         dispatcher = context.get_dispatcher()
         dispatcher.connect("reload-profile", self.update_selected_profile)
@@ -63,6 +71,9 @@ class DistribUI(gtk.Box):
         quit_button.set_visible(conf.get_boolean("basic", "quit"))
         shutdown_button.set_visible(conf.get_boolean("basic", "shutdown"))
         self.pack_start(dbox, True, True, 0)
+                
+    def on_preset_button(self, origin, i):
+            recall(i)
 
     def on_profile_button(self, origin):
         parent = self.get_toplevel()
