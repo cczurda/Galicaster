@@ -22,6 +22,7 @@ from galicaster import __version__
 from galicaster.classui.profile import ProfileUI as ListProfile
 from galicaster.classui.about import GCAboutDialog
 from galicaster.utils.resize import relabel
+# TSC! this is the import for the recall function
 from galicaster.utils.visca import recall
 
 class DistribUI(gtk.Box):
@@ -48,12 +49,17 @@ class DistribUI(gtk.Box):
         self.selected = dbuilder.get_object("selected_profile")
         self.update_selected_profile()
         
-        # create preset buttons and connect signals
+        # TSC! populate an array which holds the 6 buttons. Each button activates 1 preset.
         presets = []
         for i in range(6):
+            # dbuilder is the factory object which creates the various gui components defined in
+            # resources/ui/distrib.glade
+            # "button_pres"+str(i)  is the id of the button in the glade file.
+            # grep for button_pres0 and you will find them.
             presets.append(dbuilder.get_object("button_pres"+str(i)))
-            presets[i].connect("clicked", self.on_preset_button, i, presets)
-            print presets
+            # Button.connect() registers a callback function with a button object. The callback is
+            # executed when an event occurs with the button, in this case on "clicked".
+            presets[i].connect("clicked", self.on_preset_button, i)
 
         #Connect signals
         dispatcher = context.get_dispatcher()
@@ -72,17 +78,11 @@ class DistribUI(gtk.Box):
         shutdown_button.set_visible(conf.get_boolean("basic", "shutdown"))
         self.pack_start(dbox, True, True, 0)
         
-    def on_preset_button(self, origin, i, presets):
+    # TSC! on_preset_button is a callback function, which is passed to Button.connect
+    # the callback only calls the function recall() in galicaster/utils/visca.py
+    # with preset i
+    def on_preset_button(self, origin, i):
             recall(i)
-            print presets
-            #for j in range(len(presets)):
-            #    if(j==i):
-            #        presets[j].set_markup()
-            #for j in range(len(presets)):
-             #   label = presets[j].get_label()
-              #  print label
-               # if j==i:
-                #   print i 
 
     def on_profile_button(self, origin):
         parent = self.get_toplevel()

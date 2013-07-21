@@ -219,6 +219,7 @@
                     <property name="position">0</property>
                   </packing>
                 </child>
+                <!-- TSC! this child is the button box for the camera presets. I won't document here because I used the glade gui builder to do it and I don't really know what's going on here. -->
                 <child>
                   <object class="GtkHBox" id="hbox_cam">
                     <property name="visible">True</property>

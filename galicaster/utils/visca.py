@@ -1,5 +1,5 @@
-# executes 'visca-cli memory_recall [0-5]'
-# we don't check if daemon is running or if client is installed
+# TSC! executes 'visca-cli memory_recall [0-5]'
+# we don't check if camera is running or if client is installed. So make sure it is.
 
 from subprocess import Popen
 
